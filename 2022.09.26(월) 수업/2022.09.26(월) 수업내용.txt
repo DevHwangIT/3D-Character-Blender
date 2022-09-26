@@ -53,7 +53,7 @@ Object Selected + 오른쪽 마우스 클릭 -> Shader Smooth
   1. Header 탭 - Modifier - Solidify 추가
   2. Thickness 와 Offset 값 수정을 통한 볼륨감 주기
 
-11) 아이싱이 도넛을 따라 흘러내리는 느낌을 연출하기
+11 ) 아이싱이 도넛을 따라 흘러내리는 느낌을 연출하기
   1. Proportional Editing 을 통해서 Vertex를 드래그 후 내리기
   2. 내릴때, 도넛의 몸체에 따라서 흘러내려야 함으로, 이를 처리하기 위해 Snap( 상단 탭 자석 ) 기능을 사용.
   3. Snap 기능 사용시 Vertex가 아닌, Face로 수정해서 사용
@@ -64,15 +64,40 @@ Object Selected + 오른쪽 마우스 클릭 -> Shader Smooth
   6. 소스가 너무 각진 느낌일 경우
      [ Extrude 기능 여러번 사용해서 자연스럽게 흘러내리는 느낌을 연출해도 됨. ]
 
+12 ) 아이싱 표면의 전체적인 Smooth 적용하기
+  1. Sulpt Mode 이동 -> 좌측 브러시 종류 중 빨간 브러쉬 선택 [ Smooth Brush ]
+  2. 표면을 다듬으면서 전체적인 느낌 살리기.
+  3. Ctrl + F 브러시의 강도 조절
+
+13 ) 아이싱 표면에 뿌려진 Sprinkle 만들기
+  1. UV Sphere 생성하기 ( 4개정도 )
+     [ 처음 생성하면 부드럽지 않으니까 Shader Smooth 적용하기 ]
+  2. Vertex 절반 아래 부분을 선택하고 이동 단축 키를 통해서 길게 만들거나, Extrude 기능을 사용해서 늘리기
+     [ 차이점 : 기존 Vertex에서 새로운 Vertex를 추가하느냐 혹은 기존 Vertex의 위치를 내릴것인가 ]
+                  => 대칭형태로 Vertex의 수가 위아래가 동일해야 될 경우 Extrude를 사용
+  3. 양 끝이 너무 둥글기 때문에, 해당 영역 Vertex를 선택하고, Scale 조절 및 축 고정 단축키로 크기 조절하기
+  4. Extrude로 늘린 중간 부분에 추가적인 영역을 생성하고 싶을경우, Ctrl + R key를 통해 루프 컷 추가
+  5. 여러개의 Sprinkle을 아이싱에 편하게 작업하기 위해 컬렉션을 하나의 컬렉션으로 보관한다. 
+
+14 ) 아이싱 표면에 Sprinkle 뿌리는 방법
+  1. 도넛의 body는 작업하기 불편하니까 Hide 처리 하기.
+  2. 아이싱의 Header - Particle Properties - + 버튼으로 추가
+  3. 추가된 부분 Emitter가 아닌, Hair로 변경
+  4. Particle Properties에서 여러개의 리스트 항목중에서 Render 탭 이동해서 Render As를 Path가 아닌, Collection으로 변경
+  5. Particle Properties에서 Emission에서 개수나, 위치 등을 적절하게 조절하기  
+  6. Particle Properties에서 회전값 제어가 필요하다면 최상위에 Advanced 토글 체크 후 Rotation 이동해서 조절하기
+  7. Particle Properties에서 전체적이 파티클 종류에 따른 생성 개수 비율조절이 필요할 경우 Render - Use Count 이동해서 조절하기
+
 --------------------------------------------------------------------------------------------------------------------
 
-- Object  Mode 에서 사용하는 단축키
 O key => Proportional Editing 단축키 - 범위 지정
+
+- Object  Mode 에서 사용하는 단축키
 H key => 오브젝트 숨기기 
 Alt + H key => 숨긴 오브젝트 보이기
 Ctrl Key + P Key 
 
-- Edit Mode 에서 쓰는 단축키
+- Edit Mode 에서 사용하는 단축키
 Alt + Z key => X ray 모드
 Ctrl Key+ Select Vertex 는 추가 선택
 Shift Key+ Select Vertex는 제외 선택
@@ -80,6 +105,11 @@ Alt Key + Select Edge 루프 선택 = 선택한 같은 라인이 선택됨.
 Shift Key + D = 선택한 폴리곤 복사 = 오른쪽 마우스 클릭시 제자리 복사
 P key - Selection = 선택한 영역을 하나의 오브젝트가 아닌, 다른 오브젝트로 분리하겠다.
 E key = Extrude 점,선,면을 뽑아내기
+Ctrl + R Key = 서로 다른 Vertex 혹은 Edge 사이에 루프를 생성하는 것
+                   [ 마우스 휠로 갯수 조절 가능, 정가운데 하고싶을 경우 오른족 마우스 클릭 ]
+
+- Sculpt Mode 에서 사용하는 단축키
+Ctrl + F Key = Strength 조절
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,3 +129,11 @@ E key = Extrude 점,선,면을 뽑아내기
 
 Extrude 기능 사용시에 스냅 기능 어떻게 사용하나요?
 -> 동일하게 스냅을 활성화 한 상태로 드래그하면 동일하게 처리가능합니다.
+
+--------------------------------------------------------------------------------------------------------------------
+
+전달 내용
+
+다음주 수업은 Particle Properties에서 생성시 특정 영역에 집중되게 생성하는 방법에 대해서 알려드릴 예정입니다.
+
+일찍 오신 분들은 엘리베이터 내려서 화장실 맞은 편에 자습실이 있으니까, 자습실에서 자습하고 있어도 됩니다.
