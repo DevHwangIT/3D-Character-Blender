@@ -1,3 +1,3 @@
 ▼ Blender 수업 결과물 사진
 
-![기괴한 황천의 도넛 완성](https://user-images.githubusercontent.com/62154896/192269025-5739c376-74fa-43eb-80c5-a78b80f1cafe.JPG)
+![만들어진 도넛 결과물](https://user-images.githubusercontent.com/62154896/192531024-487fa552-fc07-4ab1-8e95-c3bed801fe57.JPG)
