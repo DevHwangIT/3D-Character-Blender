@@ -1,0 +1,96 @@
+
+블렌더에서 검정색과 흰색을 많이 사용한다.
+이유는 - 흰색은 1 검정색은 0을 의미하며, 숫자 용도로 사용함
+
+--------------------------------------------------------------------------------
+단축키 정리 
+
+Tap - 각종 Mode 변경
+Z key - 각종 View Mode 변경
+
+Edit Mode 에서 사용
+/ key - 선택한 Object만 View에 나타내는 단축키
+. Pivot Point 정하기 혹은 위쪽 상단 탭으로 옮기기
+
+Alt + Z - X ray 모드 변환하기
+
+--------------------------------------------------------------------------------
+기타 내용
+
+Shading 창 Material Output
+  -> Surface - 색상정보를 나타낸다.
+  -> Displacement - 외형 정보
+
+Snap 기능을 굳이 활성화하지않고, 이동시에 Ctrl Key를 사용하면 Snap처럼 사용가능함
+
+
+--------------------------------------------------------------------------------
+배운내용
+
+1 ) 도넛 Body 표면 울퉁불퉁한 질감 표현하기
+    [ 울퉁불퉁한 표면은 색상이 아닌, 외형 정보이므로 이것을 변경해야한다. ]
+  1. Shading 창에서 Shift + A key로 Displacement 검색 후 노드 추가
+  2. Height의 값을 수정하게 되면, 모든 영역이 적용되기 때문에 불규칙적인 효과를 추가하기 위해 추가 작업 진행한다
+  3. Shift + A key ColorRamp 노드 추가하기
+  4. Shift + A key Noise Texture 노드 추가하기
+     -> Noise Texture의 Fac -> ColorRamp의 Fac의 연결.
+     -> Color Ramp의 Color을 Displacement의 Height에 연결.
+     -> Displacement의 Displacement를 Output의 Displacement에 연결
+  5. Noise texture를 선택한 상태로 Ctrl + T Key를 눌러서 좌표와 맵핑 노드 생성
+     [ 만일 Noise를 섞고 싶다면 Shift + A key MixRGB 노드 추가하기 ]
+     [ MixRGB의 Fac 값은 Color1 과 Color2의 비율을 나타낸다. 0이면 Color1이 100과 같음 ]
+     [ MixRGB의 Mix 말고도 Add, Multiply등 상황에 맞게 건드려서 작업 진행하기 ]
+  6. 원한다면 MixRGB를 여러개 섞어도 가능하다.
+
+2 ) 방 제작 전에 바닥 작업하기 ( 도넛 제작은 종료됨. )
+    Ctrl + B key - 엣지를 여러개로 나눠서 부드럽게 깍는다? => Bevel 기능
+    [ Bevel 사용시에 Vertex나 Edge, Face가 한군데에 겹쳐질 경우 모델링이 찢어짐. 주의해야됨 ]
+   1. Plane 생성 후 Loop Cut으로 Ctrl + R key로 영역을 분할하기
+   2. 분할된 영역에 대해서 Ctrl + Shift + B Key Bevel 기능으로 간격 띄우기
+   3. 필요없는 영역에 대해서 Face로 전환하고 Face삭제하기
+   4. 가로 혹은 세로 또한 원하는 대로 수정한 후 제거하기
+   5. 얇은 장판에 두깨감을 추가하기 위해 E key - Extrude 기능 사용
+   6. Object Mode로 빠져나오기
+      [ Edit Mode에서 새로운 오브젝트를 생성하면 같은 Mesh로 인식되버림 ]
+
+3 ) 벽면 세우기
+   1. Box를 생성한 후 벽면으로 쓸 부분을 제외하고 Face 제거하기
+   2. Ctrl 혹은 Snap기능을 활용해서 바닥과 원하는 부분에 자연스럽게 배치하기
+
+4 ) 벽면에 표현된 벽돌 만들기
+   1. Plane을 벽면에 배치하기
+   2. Extrude로 모양 만들기
+   3. 깨진 벽돌 연출을 위해서 Bevel 기능을 사용해서 앞부분 Vertex를 쪼개준다. 
+   4. 쪼개진 Vertex 중 한 부분을 잡고 G key를 통한 이동을 통해 자연스럽게 연출한다.
+   5. 2줄까지만 생성하고 Object Mode로 이동
+   6. Header - Modifier Properties - Array 추가하기
+   7. 추가할 배열 개수 및 방향 조절해서 초과해서 배치하기
+   8. Edit Mode에서 중간 Vertex 아무거나 클릭한 후 Shift + S key로 Selected to Cursor사용
+   9. . key 사용해서 Pivot Point 이동하기
+
+5 ) 의자 및 책상 만들기
+   1. Box를 배치하고
+   2. 그 밑에 다리용도의 box를 만든 후, Header - Modifier Properties - Mirror 기능을 사용한다
+   3. Mirror에서 target의 스포이드를 몸통을 클릭해서 만들기
+
+6 ) 바닥 오브젝트 만들기
+   1. 카페트 만들기 - 원형 오브젝트 생성하고 F key를 통해서 면 채워넣기
+   2. 솥 밑에 깔린 땔감 만들기
+      2-1 가운데 부분을 LoopCut으로 나누고 Vertex이동을 통한 홈을 구현
+      2-2 Box 만들고 끝 모서리 부분에 Bevel 적용하기
+   3. 바닥 부분의 바닥재도 Bevel을 통해서 부드러운 곡선 연출 추가하기
+--------------------------------------------------------------------------------
+
+블렌더도 포스트 프로세싱이 되나요? Bloom을 적용한다는 말이 어떤의미인가요?
+- 미질문
+
+오브젝트를 깎을 때, 어떻게 깍는건가요?
+레퍼런스를 보고 어떻게 목업?을 해야되겠다는 판단을 내리는건가요?
+단순하게 Vertex부터 세워서 만드는건가요? 아니면 그냥 감각적으로 깎는건가요?
+- 미 질문
+
+vertex간의 비어있는 Face 채우는 기능이 뭔가요?
+- 면을 채우는 단축키는 F Key이다.
+
+Pivot Point를 수정해도 안움직이는 이유?
+- Only Location이 체크되어있기 때문에 안된 것. 해제하니까 정상작동 함.
