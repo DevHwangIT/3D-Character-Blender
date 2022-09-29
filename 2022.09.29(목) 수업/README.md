@@ -1,3 +1,3 @@
 ▼ Blender 수업 결과물 사진
 
-![만들어진 도넛 결과물](https://user-images.githubusercontent.com/62154896/192531024-487fa552-fc07-4ab1-8e95-c3bed801fe57.JPG)
+![수업결과물](https://user-images.githubusercontent.com/62154896/193035629-8fb2c224-7b8b-4a9d-a831-b867b2905811.JPG)
