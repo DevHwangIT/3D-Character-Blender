@@ -1,0 +1,122 @@
+메모
+
+------------------------------------------------------------------------------------
+
+기타 내용
+
+Alt + R,S,G ( 각각 이동,회전,크기를 초기화 시키는 방법 )
+
+------------------------------------------------------------------------------------
+
+배운 내용
+
+1 ) 거슬리는 Object들 하나의 Collection에 묶고 관리하기
+    1. 필요없는 오브젝트들 선택하기
+    2. M key 누르고 Move to New Collection
+    3. 1시 방향 뒤집어진 비커를 클릭하고 Restruction Toggle에서 화살표 버튼 활성화
+    4. 오브젝트들에 대해서 새로 생겨난 화살표 아이콘 비활성화를 통해서 선택안되게 하기.
+ 
+2 ) 옷장 삼각형 꼭대기 제작하기
+    1. 삼각형 만들어놓은 상태는 뾰족하니까 둥근 느낌을 살려줘야함.
+    2. 한쪽 면만을 남기고 나머지 Vertex 제거
+    3. Mirror기능 활성화 Y축 및 Clipping 체크
+    4. 면의 정가운데 Loop Cut으로 한줄 추가하기
+    5. Bevel로 면을 여러개 만들고 부드럽게 만들기
+    6. Solidify를 사용해서 두께감 주기
+    7. 부드럽게 만들기 위해서 Shade Smooth를 사용하는데, 그냥 Shade Smooth 적용하면 이상하게 나옴
+       [ 따라서, Auto Smooth 기능을 사용해야함. 단, 버전에 따라 오른쪽 마우스에 없으면 Header 쪽에서 찾아 적용해야됨. ]
+  
+3 ) 옷장에 책장으로 사용할 구멍 뚫고, 다듬기
+   1. 피벗을 몸통의 위치로 옮기기
+   2. 구멍을 뚫기 위한 Cube 생성하기
+   3. 그상태로 그냥 구멍을 뚫게 되면 삼각형이 꼬이므로 중간에 Loop Cut으로 엣지생성
+   4. 맨위에 삼각형을 만들기 위한 Vertex를 잡고 M key( Merge) At Center 적용하기
+   5. 꼭대기 삼각형에서 뾰작한 부분은 Ctrl + Bevel로 둥글게 만들기.
+   6. 꼭대기 삼각형에서 옆면은 Vertex 말고 Edge로 Bevel 적용해야함
+      [ 연결된 엣지가 여러개이기 때문에, 그냥 적용하면 꼬일수있음 ]
+   7. 만들어진 오브젝트를 몸통에 적절하게 배치하고 Boolean으로 구멍뚫고 Apply
+   8. Auto Shade 적용
+
+4 ) 벽난로 위에 거울만들기
+   1. 벽난로 상단 오브젝트들 피벗 설정해서 옮기기
+   2. Circle 생성하고, 각도 회전 및 면채우기(F key)
+   3. Extrude와 F key(Fill)을 통해서 적절하게 늘리고 만들기
+   4. 이상태로 Subdivision을 적용하면 면이 뭉개지는현상이 나타남
+      [ 이를 해결하기 위해서 잡아주는 면을 만들어야함 I key ( In-Set Face )를 통해서 추가면 생성 ]
+ 
+5 ) 책상위에 있는 책만들기
+   1. 큐브를 적절하게 면을 줄여가며 만들고
+   2. Ctrl + A key로 Scale Apply 처리 ( 꼭 해줘야함 )
+   3. 책면으로 상,정면,하면 부분만 I ( In-Set Face )으로 면을 만들고
+   4. 상단 Face - Extrude Faces Along Normals
+   5. 모든 면을 동일하게 하기위해 Offset 값 입력해주기
+
+6 -1 ) 책상 위에 열린 책에서 일부 중 표지 만들기
+   1. Plane 생성하기
+   2. Loop Cut으로 가운데 라인긋기
+   3. 새로 그은 라인을 Edge 모드로 선택한 후 Bevel로 양옆으로 2개씩 좁게 총 4개 만들기
+   4. Face 선택 Mode로 중앙 위아래 주기
+   5. Vertex Mode로 책 끝 모서리 각주기 Bevel ( Vertex Bevel은 Ctrl + Shift + B Key )로 작업
+   6. Modifier에서 Solidify 추가하고 두께감 주기 <- 여기까지가 펼쳐진 책  표지만들기
+
+6 -2 ) 책상 위에 열린 책에서 일부 중 내부 만들기
+   1. Plane 생성하고 Loop Cut으로 홀수개의 라인 만들기
+   2. 가운데 Edge선택하고 h key로 숨겨서 작업하기
+   3. Proportional Editing 을 활용해서 Vertex 이동이 자연스럽게 만들기
+   4. Extrude를 이용해서 두께감 주기
+   5. Subdivision을 이용해서 부드럽게 만들기
+   6. Auto Shade Smooth 더 부드럽게 만들기 ( 일반 Shade Smooth 하면 안됨. 이상하게 적용됨)
+
+7 ) 촛대 만들기
+   1. Circle 생성 후 Extrude 및 스케일 조정 및 위치 이동 반복
+   2. 만들어진 촛대를 Object Mode에서 복사해서 상단 부분을 제외한 나머지 엣지삭제
+   3. Mirror로 몸통 촛대에 매칭시켜서 양 옆에 두기
+   4. Cyilinder 생성 후 길게만들어서 촛대연결하는 부분에 배치하기
+
+8 ) 책상 무드등 만들기
+   1. Circle 만들어서 Extrude 세우기
+   2. Scale이랑 적절하게 적용해서 다만들기
+   3. SubDivision 적용 후 엣지가 깨지는 것을 막기위해서 다시 Extrude나 Loop Cut으로 모양 잡아주기
+   4. 위에 UV Sphere 넣고 Smooth 적용
+
+9 ) 책상위 유리병 만들기
+   1. Circle 만들어서 Extrude 세우기
+   2. Scale이랑 적절하게 적용해서 다만들기
+   3. SubDivision 적용 후 엣지가 깨지는 것을 막기위해서 다시 Extrude나 Loop Cut으로 모양 잡아주기
+   4. 위에 UV Sphere 넣고 Smooth 적용
+   5. 뚜겅은 Cylinder 만들어서 Smooth 넣기
+   6. 부모 자식 설정하기
+
+10 ) 벽난로 장작만들기
+   1. Cylinder 생성하고 Vertex 나 Edge건드려서 장작형태만들기
+   2. 나무의 흠집 같은 경우 Edge를 잡고 Bevel로 쪼갠 후 가운데 Edge를 늘린다
+   3. Vertex를 Bevel로 쓸때는 Ctrl+Shift+B Key의 Bevel을 적용해서 흠집을 낸다.
+  
+11 ) 벽난로 앞 철사 만들기
+   1. Mesh가 아닌 Curve에서 Beziar 생성하기
+   2. 곡선은 Header - Object Data Properties - Geometry - Bevel - Depth 깊이 줘야됨
+   3. Modifier - Array 기능으로 철막사 옆으로 복사
+   4. 철 막사 오브젝트 모드에서 복사하고 회전시켜서 옆으로 눕히기
+
+12 ) 불 이미지 넣기
+   1. Preferences - Add-ons - Image-Export:Import Images as planes 체크확인
+   2. Shift - A key 에서 Image Plane 생성
+   주의 ) Reference나 Background는 사용하면안됨. 렌더링이 되지않음
+           [해당 방법은 모델링할때 뒤에 보기편하라고 쓰는 기능임]
+
+13 ) 벽에 창문 뚫기 <- 모양만 만들고 수업 종료
+   1. Cube 만들기
+   2. 책장 가운데 뚫면서 위에 삼각형 만든 것처럼 Vertex 2개 잡고 M key 사용 ( Merge - At Center )
+
+------------------------------------------------------------------------------------
+
+궁금한 내용 질문
+
+쉐이더 감각은 어떻게 키우는 방법?
+- 
+
+카툰 렌더링 어떻게 해야 하나요?
+- 
+
+모퍼 기능 같은건 어떻게 하나요? <- 질문 보류
+- 
