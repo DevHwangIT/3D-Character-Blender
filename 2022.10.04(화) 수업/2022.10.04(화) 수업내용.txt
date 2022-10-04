@@ -1,0 +1,91 @@
+메모
+
+------------------------------------------------------------------------------------
+
+기타 내용
+
+Eevee 렌더에서 유리 재질 넣는 법
+ 1. Camera Properties - Ambient Occlusion ( AO ) 체크하기
+ 2. Camera Properties - Bloom 체크하기
+ 3. Camera Properties - Screen Space Reflection 체크하기.
+
+------------------------------------------------------------------------------------
+
+배운 내용
+
+1 ) 지난 수업에 이어서 벽에 창문 뚫기
+  1. Header - Object Data Properties - Normals - Auto Smooth 체크하기
+  2. 만들어진 창문에 대해서 Boolean 처리하기    
+     [ Boolean 했을때, 정상적으로 구멍이 뚫리지 않는다면 Boolean에서 Solver를 Fast로도 바꿔보기 ]
+
+2 ) 창틀 만들어주기
+  1. Boolean할 때, 사용한 오브젝트 복사해서 Face면 삭제하고, Scale 줄여서 창틀처럼 만들기
+  2. 벽에 잘 배치한다음에 Solidify로 두께감 다시 살려주기
+  3. Subdivision 적용하면 아래쪽이 잡아주는 Vertex가 없어서 둥글게 변함
+     [ 이를 해결하기위해서는 Loop Cut, Bevel, Transform의 Mean Crease 값을 올려서 적용하는 법이 있음 ]
+  4. 수업에서는 MeanCrease 를 적용하는데, 이래도 끝이 뭉게지면 Subdivision과 Solidify의 순서를 바꾸기.
+  5. Cube 꺼내서 사이즈 적당히 길게 만들고 창틀 만들기, 복사해서 세로로 배치
+
+3 ) 호박 만들기
+  1. 큐브 생성하고 윗면 선택 후 위로 잡고 위치 값을 늘린 후 면의 크기는 줄인다
+  2. Shift + 오른쪽 클릭으로 3D Cursor의 위치를 해당 오브젝트의 상단으로 옮기기
+  3. . Key로 중점을 3D Cursor로 변경
+  4. 오브젝트 복사하고 45도 간격으로 배치하기 꽃모양이 나올때 까지.
+  5. 그상태로 스케일과 크기 조절로 만들기
+  5. 큐브 꼭지 만들기
+
+4 ) 촛농 만들기
+  1. Cylinder 생성 후 늘린 다음 상단 I In Set Face로 면 3개정도 추가.
+  2. 상단 면을 건너건서 선택 한 후 O key 활성화 후 위치 배치
+  3. 가운데 면을 위치 내려서 촛농이 가운데 파인 느낌 연출하기
+  4. 다음 단계 진행하기 위해서 Multiresolution에 대한 설명 ( Subdivision과 비교함 )
+     [ Multiresolution에서 Subdivision 적용하기 <- Sculpt 사용할 것 아니면 사용추천 안함 ]
+     [ Sculpt를 할때는 Subdivision보다는 Multiresoultion을 사용하는 걸 추천 ]
+  5. Sculpt 브러쉬로 촛농이 흘러내리는 느낌 연출하기
+  6. Image Add on을 통해서 Image 촛불 가져오고, 촛농위에 배치하기
+  7. 30도 간격으로 배치하여, 어떠한 각도에서든 보일 수 있게 처리
+  8. Ctrl + P key Set Transform Parent기능을 통해서 처리
+  9. 원하는 곳에 배치하기.
+
+5 ) 책상에 흠집내기.
+  1. 책상 Edge 클릭하고, Ctrl+B key Vertex 흠집은 Ctrl+Shift+B key
+
+6 ) 나뭇잎 만들기.
+  1. Plane 생성 후 Extrude 및 Loop Cut, Scale Position을 조정해서 나뭇잎 만들기
+  2. Cube 납작하게 누른 후, Subdivision으로 둥글게 만들기
+  3. Cube에 Particle Setting 설정
+     [ Particle을 Animation으로 만들건 아니기때문에 End를 1frame으로 바꿈으로써 1프레임 안에 생성되게 처리 ]
+  4. Particle Properties - Render에서 Halo를 Object로 변경
+  5. 적절하게 속성 건들면서 파티클 배치되게 설정
+
+7 ) 색상 입히기
+  1. 바닥 Shading View 이동
+  2.  NoiseTexture -> Color Ramp -> BSDF 순으로 적용
+  3.  NoiseTexture 클릭 후 Ctrl+ T key로 회전 및 기타 설정 노드 생성
+      ( 만약 안뜨면 Add On에서 node Wrangler로 설치 )
+  4. 책 색상 칠할 때, 한 오브젝트에서 여러개의 머티리얼을 쓰고싶을 경우.
+  5. Edit 모드에서 다른 색 원하는 Face 선택한 후, Material Properties에서 새로운 머티리얼 추가
+  6. 거울 안쪽은 반사되어야 하므로, Metallic 0.9 설정 및 Roughness 0.2 정도 낮추기
+  7. 같은 Material을 사용하고 싶을 경우 Ctrl+L key Link Material 적용하기.
+  8. 기타 알아서 질감 잘넣기
+
+  9. Eevee 렌더에서 유리 재질 넣는 법 -> 기타내용 참조하기
+     [ Eevee 렌더는 실제 광선추적 방법이 아니기 때문에, 일반적으로 유리질감이 안나타남 ]
+  10. 유리 재질원하는 오브젝트 쉐이더 노드로 이동 Transmission 1로 변경, Roughness 는 0으로 설정
+  11. Shift + A 로 Transparent BSDF 노드 생성하기
+  12. 11번과 기존 BSDF를 Shift + A로 생성한 Mix Shader에 연결한 후 Mix Shader의 Output을 Material Output Surface에 연결하기
+
+여기까지 하고, 다음에 유리 자세한건 또 다시 설명할 예정
+
+------------------------------------------------------------------------------------
+
+궁금한 내용 질문
+
+쉐이더 감각은 어떻게 키우는 방법?
+- 
+
+카툰 렌더링 어떻게 해야 하나요?
+- 
+
+모퍼 기능 같은건 어떻게 하나요? [ 보류 질문 ]
+- 

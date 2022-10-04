@@ -1,0 +1,5 @@
+블렌더 설정 정보 경로 ( 해당 폴더안에 있는 모든 파일 )
+C:\Users\D_19\AppData\Roaming\Blender Foundation\Blender\3.3\config
+
+애드온 파일 경로 ( 애드온 폴더 복사하기 )
+C:\Users\D_19\AppData\Roaming\Blender Foundation\Blender\3.3\scripts\addons
