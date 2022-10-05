@@ -1,0 +1,109 @@
+메모
+
+------------------------------------------------------------------------------------
+
+기타 내용
+
+[ 색상 텍스쳐 ]
+- diff : Base Color 연결 [ Diffuse ]
+- rough : Roughness 연결
+- disp : Displacement 연결
+
+Displacement 연결하는 법
+  -> 기존 텍스쳐를 Surface에 연결하는 것과 다름.
+	-> Displacement Texture- Displacement - Output Material Node의 Displacement로 연결
+  
+   = Displacement도 유리처럼 설정해야되는게 존재함. 
+      => Material Properties - Setting - Surface - Displacement - Displacement and Bump로 변경
+	=> 전부다 설정했음에도, 깊이감이 없을 때는, Subdivide로 Vertex의 개수를 늘려준다.
+
+[ 외형 텍스쳐 ] -> 표면 주름, 요철, 질감 등 외형적 디테일 표현.
+
+1. Bump = 흑백으로만 표현( 눈속임 )
+   [ Bump와 Normal이랑 똑같으니 Bump가 더 옛날 만들어져서 검은색, 흰색밖에 표현안됨 ]
+
+2. Normal = RGB로 표현( 눈속임 )
+   [ 그나마 최근에 나왔으나, RGB로 표현되서 Bump보다 더 자세히 표현가능함 ]
+
+3. Displacement = ( 실제 외형적으로 변화를 줌 )
+   [ Vector를 가지고 표면을 변화시키는거같네 ]
+
+
+UV 피는 법을 연습 ( Edit Mode 확인하기 )
+[ UV가 잘 입혀져있는지 확인하려면, Shading 에서 UV map Node - Checker Texture Node - BSDF Base Color에 연결 ]
+  1. UV를 펴고 싶은 부분을 선택
+  2. UV View 상단 UV - Mark Seam을 선택 ( 뜯을 부분을 체크하는 기능 )
+  3. 오브젝트 전체 선택 UV View 상단 UV - Unwrap ( 전개도를 펼치는 것을 의미 )
+     [ 중요! Unwrap 할때, 항상 전체선택 이후에 Unwrap 할 것. ]
+
+------------------------------------------------------------------------------------
+
+배운 내용
+
+1 ) 지난 수업에 마저 못한 유리 재질 입히기
+   1. 기타 Eevee 렌더에서 유리 재질 설정하거나, 남은 색상들 집어넣기
+
+2 ) 땔감 및 장작에 나무 텍스쳐 입히기
+    1. Poly Haven 에서 나무 텍스쳐 다운받아오기
+    2. 다운 받은 텍스쳐 열어서 적용하기.
+       [ HDRI 이미지를 적용할 때는 드래그로 넣으면 안됨 ]
+       [ Image Texture로 적용되기 때문에, HDRI 이미지는 Enviroment Texture를 사용해야함. ]
+
+3 ) UV 피고, 오브젝트에 텍스쳐 입히기.
+    1. 그냥 텍스쳐를 입히면 텍스쳐가 깨짐. <- UV가 안펴져있기 때문에.
+    2. 오브젝트 선택 후 상단 UV Editing View로 이동
+    3. Edit Mode로 변경하면 선택한 면이 UV Editing에 나타나짐.
+       [ UV가 잘 입혀져있는지 확인하려면, Shading 에서 UV map Node - Checker Texture Node - BSDF Base Color에 연결 ]
+  
+4 ) UV 연습하기
+       Cone을 가지고 UV피는 법 연습
+       [ Alt로 Edge 하나 선택하고 Mark Seam -> Unwrap 으로 펼치기 ]
+ 
+5 ) UV 관련 적용
+    1. 책 표지만 UV 펴서 적용
+    2. 펼쳐진 책의 페이지 내용 UV 펴서 적용
+  
+6 ) 벽돌 색상 적용하기
+     1. 벽돌 색상 적용하기 ( Bump를 스는 이유 Color Map에서 흰색,검은색 등의 단색을 쓰기때문에 )
+       [ Noise Texture - ColorRamp - Bump - BSDF 적용]
+       [ Roughness 0.9 ]
+     2. 벽돌에 색 적용
+   
+7 ) 조명 심기
+     1. Point Light 호박사이, 책장 내부 등등 곳곳에 심어넣기, Spot Light를 주광 하나와 서브광 2~3개 다양한 각도에서 심기
+  
+8 ) 태양 빛 효과 만들기
+     1. 창문에서 태양 빛이 들어오는 연출을 위해 Sun Light 심고, 방향 각도 조절하기
+     2. 태양빛이 내리쬐는 느낌을 위해서  창문에다 Cube 생성 후 적절하게 늘리거나 크기를 조절한다
+     3. 기존 존재하는 BSDF와 Surface 삭제 후 Principled Volume - Material Output의 Volume에다 연결
+     4. Color값, Density (0.1) Emission Color 값, Emission Strength (0.05) 정도로 조절하기
+     5. Rendering Mode를 Eevee가 아닌, Cycle로 변경해서 렌더링해야 효과가 됨.
+
+9 ) 카메라 배치하기
+     1. 카메라 생성하기
+     2. 카메라 선택한 상태로 N Key 누르고, Transform Tap 옆에 View 탭 이동후 Camera To View 체크하기
+     3. 0 Numpad로 Camera View상태로 원하는 각도 편하게 배치하기
+     4. 배치 완료 끝나면 Camera To View 끄기
+     5. Header - OutPut Propertes - 출력 해상도 조절하기
+     6. Camera 선택한 상태로 Camera Properties - Lens - Type 원하는 것 설정 및 조절하기
+
+10 ) Cycles Output 설정
+     1. Output Properties - Render - Max Samples - 200정도로 줄이기
+     2. 상단 Compositing Window? View?에서 무슨 노드를 추가하고..? 못들었음...
+        [ 이걸해야 Cycles 렌더에서 점 생기는걸 없앤다 ]
+
+마지막으로 캐릭터 사진 다운받고, View에서 배치
+  -> 다음 수업부터 캐릭터 만들기 시작.
+
+------------------------------------------------------------------------------------
+
+궁금한 내용 질문
+
+쉐이더 감각은 어떻게 키우는 방법?
+- 
+
+카툰 렌더링 어떻게 해야 하나요?
+- 
+
+모퍼 기능 같은건 어떻게 하나요? [ 보류 질문 ]
+- 

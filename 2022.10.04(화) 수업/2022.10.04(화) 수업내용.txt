@@ -8,7 +8,10 @@ Eevee 렌더에서 유리 재질 넣는 법
  1. Camera Properties - Ambient Occlusion ( AO ) 체크하기
  2. Camera Properties - Bloom 체크하기
  3. Camera Properties - Screen Space Reflection 체크하기.
-
+ 4. Material Properties - Setting - Blend Mode - Alpha Hashed
+ 5. Material Properties - Setting - Shadow Mode - Alpha Hashed
+ 6. Material Properties - Setting - Screen Space Refraction 체크하기.
+ 7. 쉐이더 노드에서 Mix Shader 및 Principed BSDF, Transparent BSDF 추가해서 연결
 ------------------------------------------------------------------------------------
 
 배운 내용
