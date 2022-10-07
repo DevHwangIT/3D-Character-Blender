@@ -1,0 +1,108 @@
+메모
+
+------------------------------------------------------------------------------------
+
+기타 내용
+
+모델링하다가 Face가 이상한 부분은 Alt+N키 누른 후 Flip으로 뒤집기
+
+오른쪽 상단 option 버튼 눌러서 location 체크 되어 있는지 확인. 돼있으면 끄기
+
+Sculpt Mode 관련
+ Sculpt Mode에서 F - 영역 크기 조절 Shift + F Key 힘 조절
+ Sculpt 작업할 때에는 오른쪽 상단 Option 버튼에서 Matcap으로 변경
+
+Sculpt Mode Brush 관련 설명
+
+ Brush(푸른색) - X key -> 가장 일반적으로 사용함
+ [ Brush 상태에서 그냥 칠하면 채워지고, Ctrl 누르면 살이 깍임 ]
+ Draw Sharp Brush (푸른색) -> 옷의 주름을 나타낼때 사용함
+ Crease Brush (푸른색) - Shift + C Key -> 가운데가 힘을 많이 받아 파여서 사용하는 브러쉬.
+ [ 입술, 콧볼 등을 만들 때에 주로 사용함. ]
+ [ Brush 상태에서 그냥 칠하면 채워지고, Ctrl 누르면 살이 깍임 ]
+
+ Elastic Deform Brush(노란색) -> 모양 잡는 브러쉬
+ [ 캐릭터나 사람 처음만들 때, 형태를 잡는 브러쉬 ]
+ Grap Brsh(노란색) -> 뽑아주는 용도의 브러쉬
+ Snake Hook(노란색) -> Grap보다 더 많이 뽑아주는 브러쉬?
+
+ Smooth Brush(구분없음) Shift 누른상태로 칠 -> 울퉁불퉁해진 면을 펴주는 브러쉬
+ [ 현재 브러쉬의 상태와 상관없이 면을 펴주는 브러쉬 ]
+
+------------------------------------------------------------------------------------
+
+배운 내용
+
+1 ) 눈을 만들어요.
+   1. 빈 프로젝트에서 UVSphere 생성해서 X축 90도 회전하고 정면 바라보게 설정
+   2. 동공을 위한 Alt Key로 엣지라인 하나 잡고 Shift + D 복사 후 P key Separate 분리하기
+   3. 분리한 동공을 안구안쪽으로 살짝 집어넣고, Extrude 및 늘어난 Vertex부분 스케일 줄이기
+      [ 생성된 부분이 면이 이상할 경우, 렌더쪽 옵션가서 Backface Culling 체크 -> 면의 앞면은 색상이 나오고, 뒷면은 투명 처리됨. 작업할때는 걸리적거려서 끈다. ]
+      [ Front View로 이동해서 뒤집힌 면만 선택 후 Edit Mode에서 Alt + N 누른 후 Flip 누르기 -> 면이 다시 한쪽으로 뒤집힘 ]
+   4. Modify Subdivision 2 적용 후, 세로축으로 Loop Cut 4개 정도 삽입 후 생성한 선이 둥글게 스케일 조절하기
+   5. 제일 깊은 면 클릭한 후 I Key로 In Set Face 하나정도 추가해서 면이 자리잡게끔 잡아주기
+   6. Right View에서 Edge 정중앙 부분 Alt로 선택한 후 UV Mark Seam 사용해서 절단면 만들기
+   7. A 눌러서 전체선택하고 Unwrap 처리하고, 앞면 부분만 페이스 선택 후 UV 맵 전체에 꽉차도록 펼치기
+      [ 전개도가 꽉차도록 쉽게 하는법 UV 메뉴에서 Pack Islands 기능 사용 ]
+   8. 안구는 외곽하나 Mark Seam 적용 후 Unwrap 처리하면 자동으로 펴짐
+
+2 ) 안구 부분 쉐이더 적용하기
+   1. 안구의 Material 만들기 위해 Shading 이동해서 Outter 머티리얼 만들기
+   2. 기본 base color값 0으로 처리 후 Shift + A Key GlassBSDF , TransparentBSDF 두개의 노드 꺼내고 Mix Shader에 연결 섞기
+        [ 투명하게 만들기 위해 두개의 노드를 쓴다. ]
+   3. Mix Shader 노드를 하나 더 꺼내서 위는, 기본 BSDF 연결 아래는 MixShader 결과 연결
+   4. ColorRamp 꺼내서 MixRamp에 Fac값에 연결하고, 꺼낸 ColorRamp의 Fac값에는 새로운 Gradient Texture를 꺼내서 노드 연결해주기
+   5. Gradient Texture 누른 상태로 Ctrl + T key로 맵핑 노드 꺼내기
+   6. UV를 폈기 때문에 Texture Coordinate에서 출력 값을 Generated가 아닌 UV로 바꾸기
+        [ Ctrl 누른 상태로 ColorRamp를 누르면 실제 눈동자에 어떻게 나오는지 확인 가능함 ]
+   7. Gradient Texture의 Type을 Spherical로 변경하고, Mapping에 Location이나 기타 값 건드리면서 찾기
+        [ 그냥 강사님이 값을 불러줌 Location X,Y에 -0.5씩 넣기 ]
+   8. ColorRamp의 Pos를 0.8정도로 올려서 검정색 부분이 많이 첨가되게 하기.
+
+3 ) 동공 부분 쉐이더 적용하기
+   1. 동공 오브젝트의 안쪽 Face 선택 한 후 Material Properties에서 새로운 Material 만들기
+   2. Base Color를 검은색으로 변경해서 Assign 적용하기.
+   3. 기본 BSDF 제거하고, ColorRamp Node, Noise Texture,Gradient Texture 꺼내기
+   4. Gradient Texture의 Ctrl + T key로 맵핑 노드 꺼내기
+   5. UV로 눈 좌표계 Output변경하기 [ 안구와 방법 동일 ]
+      [ Texture Coordinate - Mapping - Gradient Texture - Noise Texture - ColorRamp - Material ]
+      [ 그냥 강사님이 값을 불러줌 Mapping에서 Location X,Y에 -0.5씩 넣기 ]
+   6. 여기까지하고, 전체 노드 복사해서 붙여넣고, 복사한 전체노드에서 Noise Texture 삭제하고 연결하기
+   7. Mix RGB 노드 꺼내고, 복사한 노드 전체를 위로, 기존 노드를 아래로 연결
+   8. 복사한 노드의 Gradient Type 어울리는 걸로 변경 [ 수업에서는 Spherical 사용 ]
+   9. MixRGB의 Type Overlay로 변경
+   10. 기존 노드 다시 복사해서 새로운 전체 노드3을 만들기
+   11. Noise Texture 동일하게 삭제
+   12. MixRGB 꺼내서 기존 MixRGB Output과 전체 노드3을 연결
+   13. 전체 노드 3의 Gradient Texture Type을 Spherical 변경, Color Ramp 적절하게 조절하기
+   14. 전체노드 1,2 및 전체 노드 3와 연결된 Mix RGB Type을 Multiply로 변경하고, Pac 값 0.9정도로 올리기
+
+4 ) 안구 전체 렌더링 해보기
+   1. 종류에 상관없이 조명심고, 밝기 거리 등등 조절하기 
+   2. Eevee로 Render하면 아무것도 안보임 Cycles로 렌더링하기
+   
+5 ) 안구 옮겨서 배치하기
+   1. 동공누르고 안구 누른상태로 Ctrl + P Key Transform Parent 설정
+   2. 하이라키뷰? 에서 안구 펼쳐서 전부다 선택한 상태로 복사
+
+6 ) 캐릭터에 눈 생성하기
+   1. 캐릭터 블렌더 창 열고, 복사한 눈 붙여넣기
+
+7 ) Sculpt 모드 관련 설명 진행
+   1. 기타 내용 참조하기
+
+8 ) 캐릭터 얼굴에서 안구부분 돌출 Sculpt 작업
+   1. 캐릭터 얼굴 선택한 상태로 Sculpt 모드 이동
+   2. 눈 주변을 브러쉬로 파면서 Smooth Brush로 부드럽게 만들기
+   3. 캐릭터의 동공이 작아서 무섭게 보이므로, 이를 다시 키워서 귀엽게 연출하기
+
+------------------------------------------------------------------------------------
+
+궁금한 내용 질문 리스트
+
+블렌더에서 카툰 렌더링 어떻게 해야 하나요?
+- 
+
+Max의 모퍼와 같이 얼굴의 표정을 Set-Up하는 기능 같은건 어떻게 하나요? [ 보류 질문 ]
+- 
+
