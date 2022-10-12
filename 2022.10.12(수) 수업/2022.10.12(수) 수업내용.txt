@@ -1,0 +1,86 @@
+메모
+
+------------------------------------------------------------------------------------
+
+기타 내용
+
+- UV에서 UV Map의 사이즈 크기가 서로 다를때, 동일하게 만드는법
+UV - Averege Island Scale 적용하기
+[ 단, 실제 모델링 크기가 클경우 실제 크기를 반영해서 UV 크기도 결정됨. ]
+
+- UV에서 Ctrl+T key로 Mapping Node값을 변경할 경우 주의할 점
+대부분의 Texture에서 Normal, Roughness, Diffuse 텍스쳐의 모양은 일치하기 때문에
+Mapping Node의 Output을 공통으로 연결해줄수 있도록 처리한다.
+
+------------------------------------------------------------------------------------
+
+배운 내용
+
+1 ) 옷 만들기
+   1. 몸통 Edit Mode로 이동 Xray 키고, 옷형태 선택
+   2. Shift + D Key ( Duplicate 기능 ) 으로 복사하기
+   3. P key로 오브젝트 분리
+   4. 상단에서 목 부분 Face 구멍 뚫기 및 X 축 Mirror를 적용
+   5. 라운드 넥을 만들기 위한 Vertex 누르고 G Key 2번눌러서 이동 Z축 고정이동시 모양이 깨질수 있음
+   6. 옷에 팔 끝 부분이 각져있기 때문에, Vertex를 위아래로 잡고 늘려주기.
+      [ Scale 조절했음에도 한방향으로만 늘어나면 . Key Median Point 확인하기 ]
+   7. 끝에 LoopCut으로 엣지 하나 추가하기.
+   8. 추가한 엣지를 잡고 Ctrl + B Key Bevel로 3개 엣지 추가생성하기
+   9. X축 Mirror로는 루프컷 등이 적용되지 않으므로, X ray누르고 나머지 절반 삭제 후 Mirror Modifier 적용
+      [ 가운데 Vertex가 떨어지지지 않게 Cliping 체크하기 ]
+   10. Subdivision이 먼저 적용되어 있어서 옷이 말리는 것이므로, 순서를 변경하기
+   11. Solidify Thinkness 0.02, Offset 1.0000 적용하기
+   12. Sculpt Mode에서 Sharp Brush 적용해도 옷의 주름이 표현안됨 -> 버텍스 수가 적기 때문에.
+   13. Subdivision을 Apply해도 되지만, Sculpt Mode에 친화적인 Multi Resolution 적용하기.
+   14. MultiResolution을 적용하기 위해서는 먼저 Mirror를 apply해야함
+        [ MultiResoultion은 순서를 변경하지 못하고, 가장 먼저 적용되기 때문임. ]
+   15. 적용 후 Sculpt Mode에서 Sharp Brush로 옷 주름 표현하기
+
+2 ) 옷 깃 만들기
+   1. Plane 생성 후 가운데 Loop Cut 주고, 왼쪽에 있는 Vertex는 삭제하기
+   2. V key 가운데 Vertex 찢기
+   3. 위쪽으로 Extrude로 늘리기, 다시 Z축으로 늘리기
+   4. Solidify 적용 및 Subdivision, Shader Smooth 적용하기
+   5. Subdivision이나 Smooth로 인해서 둥글어진 부분 Alt 엣지로 Bevel 적용하거나 LoopCut으로 각 만들어주기
+
+3 ) 멜빵 바지 만들기
+   1. Body의 멜빵 바지 영역 부분을 X Ray 모드에서 선택하고 Shift + D key + 오른쪽 마우스 클릭으로 제자리 복사하기
+   2. P key로 오브젝트로 분리하기
+   3. 분리한 바지 오브젝트의 발 나와야 되는 부분 Face 선택하고 Face 삭제하기
+   4. 발목 부분 일자 정렬하기 위해서 정렬 부분 Alt 복수 선택 하고, Scale 수정 Z key 
+   5. MultiResolution을 적용 및 전체적으로 Vertex 조절하면서 하의 사이즈 맞게 조절하기
+   6. Sculpt Mode에서 Shape Brush로 주름 연출하기
+
+4 ) 멜빵 바지 끈 만들기
+   1. Plane 꺼내서 Vertex 두개 잡고 Extrude 하면서 Face Snap으로 길게길게 늘리기
+   2. Solidy 및 Shader Smooth 등등 적용해서 다듬기
+
+5 ) 단추 만들기
+   1. Cyilinder 생성 후 사이즈, 회전, 위치 맞춰서 배치하기
+   2. I key ( In Set Face ) 로 단추 면 만들고 Extrude 안쪽 이동으로로 두께감 주기
+   3. Shader Smooth 적용하기
+   4. Mirror 적용해서 동일하게 하나 더 생성하기.\
+
+6 ) 꼬리 회전하기
+   1. . key 누른 후 Indivisual 변경 후에 연결된 지점의 Vertex를 제외하고 나머지 Vertex 선택 후 회전시키기
+   2. Front View에서 보일 수 있도록 잘 배치하기.
+
+7 ) 작업했던 바지, 상의 등 Material 작업하기
+   1. 바지의 경우 질감이 있어야 되므로, Poly Haven 사이트에서 Fabric 다운받아 적용하기
+   2. 이전에 설명했던대로 흑백이면 Bump 노드 생성 후, RGB면 Normal Map Node 생성 후 연결하기
+   3. 나머지는 기존 텍스처 작업과 동일함.
+
+8 ) 카메라, 배경등 배치
+   1. 배경은 Plane깔고 Extrude로 뒷 부분 늘린후, 각진 부분 Edge 잡고, Bevel로 부드럽게 만들기
+   2. Point, Area 조명 심기 및 카메라 각도 등 처리하기
+
+------------------------------------------------------------------------------------
+
+궁금한 내용 질문 리스트
+
+블렌더에서 카툰 렌더링 어떻게 해야 하나요?
+- 
+
+Max의 모퍼와 같이 얼굴의 표정을 Set-Up하는 기능 같은건 어떻게 하나요? [ 보류 질문 ]
+- 
+
