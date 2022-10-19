@@ -4,10 +4,76 @@
 
 기타 내용
 
+고퀄리티의  텍스쳐를 bleander market이나 Artstation에서 돈주고 텍스쳐를 살 수 있다.
 
 ------------------------------------------------------------------------------------
 
 배운 내용
+
+Sculpting이나 Brush 칠하는 법이 너무 안된다. 창피할 수준 -> 개선방안 마련
+
+1 ) 입술 주름 만드는 방법 ( Sculpt Mode에서 브러쉬로 텍스쳐 넣는 법 )
+   1. Active Tools and Workspace setting 창으로 이동해서 설정
+   2. Texture에서 Mapping -> Area Plane 변경
+   3. Texture New로 만들어주고, 알약 모양 ( show Texture  in texture tab ) 선택하기
+   4. open으로 다운받은 이미지 불러오기. preview에서 회색 텍스쳐에 주름 보이나 체크
+   5. Shading Tap으로 이동해서 Texture Node 만들어서 연결하기
+
+2 ) UV펴서 텍스쳐 칠하기
+   1. Shading에서 Texture Node 연결된거 확인했으면 Texture Paint로 와서 전체 색상 페인트통으로 피부색 변경해주기
+   2. 만약, 브러쉬 색을 섞어서 칠하고 싶으면 Multiply 아닐경우 Mix 사용
+   3. 분홍 느낌으로 입술 칠하고, 삐져나온 부분은 스포이드로 피부색 선택해서 없애주기
+   4. 궛속과 콧볼 등을 옅은 갈색으로 칠해주기.
+   5. 쇄골 부분 이동해서 잘 안보이니까, MatCap 활성화해서 쇄골부분 칠해주기.
+   6. 어깨 끝 부분도 살짝 칠해주기.
+   7. 귓볼 끝 부분도 칠해주기
+   8. 콧구멍 부분 음영이  어둡기 때문에 해당 부분 칠해서 표현해주기.
+   9. 볼터치 칠하는데, 처음에는 크게 동그라미 칠하고 Radius 줄여가면서 칠해주면 그라데이션 형태로 완성이 됨.
+      [ Soften Brush는 경계가 뚜렷하게 나오니까 활용하기 ]
+   10. 눈가 주변 아이라인 검은색 칠해주기
+   11. Active Properties에서 Falloff값을 통해서 외곽 조절해서 눈가 아래의 점 찍기
+
+3 ) 얼굴에 반짝반짝 효과 내기 [ Roughness를 통한 표현 ]
+   1. Shading에서 Texutre Node 추가하고 Roughness에 연결하기
+   2. New로 새로운 이미지 파일 생성 ( 크기는 동일하게 설정 )하고, 대략적인 수치로 ( H=0, S=0, V=0.75 ) 정도로 셋팅하기
+      [ 만약, 여기까지 처리했는데, 회색이 아닌 색상이 Texture Paint창에서 보인다면 속성 창 이동해서 수정하기 ]
+   3. ( H=0, S=0, V=0.3 )정도로 반짝이게 하고싶은 부분에다가 색칠하기
+      [ Value 값이 낮아질수록, 실제 Roughness에 적용되는 값이 낮아져서 더 반짝거리게 보이게 된다 ]
+      [ 수업에서는 입술 부분 및 콧볼에 살짝 브러쉬를 칠합니다. ]
+   4. 중간중간 작업한 텍스쳐 저장 필수로 해줄 것.
+   5. 쇄골, 볼이랑 턱끝 부분도 조금 연하게해서 칠하기
+   6. LayOut으로 이동해서 Point Light 적절하게 심고, Power 설정해주기
+      [ 거리에 따라 다르기 때문에, 대략적으로 설정 수업에서는 1300W 정도 설정함 ]
+   7. Eevee Render로 돌리기.
+   8. Camera Properties로 이동해서 Ambient Occlusion 체크하고, Bloom 설정, Screen Space Reflection - Refreaction 체크하기
+   9. 눈알 선택한 상태로 Material Properties에서 Setting 내부의 Blend Mode와 Shadow Mode 둘다 Alpha Hashed로 설정하고, Screen Space Refraction 체크하기
+   10. 동공을 선택하고 Rotate로 회전시켜서 조절하기.
+      [ 눈동자가 정가운데 있기보다는 살짝 안으로 모아서 더 자연스럽게 연출할 수 있음. ]
+   11. 눈에 Point Light가 반사되는 걸 막으려면, Cycle Render 이동, Light 선택 후 Light Properties에서 Multiple inportance 체크 해제하기
+      [ 단, Cycle는 너무 느리기 때문에 Eevee로 렌더링 함.]
+
+4 ) 속눈썹이랑 눈썹 만들기
+   - 속눈썹 밑바탕 작업
+   1. Plane mesh 생성하고, 뒷 Vertex 제거하고 앞 Vertex들 잡은 상태로 Extrude 처리하기
+   2. 전체적인 방법은 다람쥐 만들었을때와 동일함. 이전 수업내용 메모 참조하기
+
+   - 눈썹 작업
+   3. 눈 절반 만들고, Mirror와 Solidify 적용
+      [ 했어도 눈썹이 밖으로 안튀어 나올경우 Edit 모드에서 Alt+N Key Filp기능으로 면 뒤집기. ]
+      [ 눈 뒷 꼬리 올리고, 앞 꼬리 내리면 화난 얼굴이 표현됨. 중간을 올리게 표현하면 놀란 표정으로 표현가능함 ]
+   
+   4. 속눈썹 밑바탕에 눈동자가 묻혔을 경우 눈썹을 선택한 상태로 Edit Mode로 이동해서 살짝 움직여주기
+      혹은 Sculpt Mode에서 Elastin Deform Brush로 살짝 올려주기
+   
+   5. 속눈썹 가닥 중에서 작은 가닥 만들기 위해서 Vertex 4개 잡고 복사한 후 P key Seperate 사용해서 분리한 후 Object Mode 이동해서 선택하기
+   6. Extrude로 눌린 후 Vertex 간격 줄여서 뾰족하게 모양 잡아 만들기
+   7. 이렇게 만들어진 속눈썹 작은 가닥을 옆으로 복사해서 배치시켜주기.
+   8. Plane 꺼내서 X축만 길게 늘리고, Plane을 Curve로 변경??? ( 이 부분 못 들음. 찾아서 수정하기 )
+   9. Curve에서 Path 꺼내서 생성 후, Geometry - Bevel - Object 선택 후 스포이드 Plane 선택
+   10. S Key로 조절하면 길이가 조절되고, Alt + S Key로 Scale 조절하면 두께가 조절됨.
+   11. 끝에만 잡고 두께를 줄이면 뽀족한 모양의 눈썹이 만들어짐.
+
+여기 까지 하고, 내일은 자세하게 설명할 예정임.
 
 ------------------------------------------------------------------------------------
 
