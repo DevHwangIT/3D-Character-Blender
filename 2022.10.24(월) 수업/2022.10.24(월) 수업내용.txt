@@ -4,11 +4,72 @@
 
 기타 내용
 
+Ctrl + P Parent 설정
+Alt + P Parent 끊기.
+[ Clear Parent : 종속 관계 끊어버리기 / 아예 다른 뼈로 분리해버리기 ]
+[ Dissconect Bone : 종속 관계는 유지하되, 뼈들 끼리 붙어있게하기 ]
+
+Parent가 될 얘를 마지막에 선택
+- 뼈가 움직일 때, 몸통이 따라서 움직여야 되니까
+뼈=Parent(맨마지막에 선택,노란색), 몸통=children(먼저선택,주황색)
+
+Weight Paint 확인하는 방법
+1. 뼈 선택한 상태로 PoseMode로 되어있어야 함.
+2. Pose Mode에서 Object 클릭이 안될 경우 Edit - Lock Object Mode 체크 확인
+   [ Pose Mode에서 오브젝트 클릭이 안되게 해주는 기능 ]
+3. 몸통 선택> Weight Paint Mode로 이동하기
+4. Pose Mode에서 Ctrl Key를 누른 상태로 원하는 뼈 선택하기.
+5. View Port Overlay 에서 zero Weights Active 체크하면 Weight가 0인 값은 검정색으로 표시됨.
+
+포즈 모드에서 이동 후 원래대로 돌리려면
+Alt + G , Alt + R, Alt + S Key
+
+작업하다 Vertex Groups을 전부 삭제했을 경우
+- 어차피 Vertex Group은 내부에서 이름으로 찾기때문에, 동일한 이름으로 설정해주면 된다.
 
 ------------------------------------------------------------------------------------
 
 배운 내용
 
+리깅 관련된 내용 수업진행
+
+1 ) Amature 생성해서 본 만드는 작업
+   1. 뼈대 생성해서 Edit Mode에서 Extrude로 뼈 대 생성하면서 늘리기.
+      [ 큰 뼈대를 하나만 생성하고 오른쪽 마우스 클릭 Subdivision 사용해서 뼈대 생성하는 방법도 있음. ]
+   2. 가슴 뼈 작업할 때 Extrude로 뽑으면 하나밖에 안뽑힘.
+      왼쪽 오른쪽 동시에 뼈 두개를 뽑는 방법
+      [ Active Tool and Work Space Setting - Option - X-axis Mirror 체크 후 Shift 누른 상태로 Extrude ]
+      [ X Mirror 켜도 안될 경우 Bone의 실제 이름이 다르면 안됨. ]
+      [ Ex) Shoulder_L, Shoulder_R -> 적용됨. ]
+      [ Ex) Shoulder_L, Neck_R -> 적용안됨. ]
+
+2 ) 각 뼈대 확인하면서 Weight 값 페인트로 적절하게 색칠하기.
+   1.  브러쉬 칠해도 반응이 없을 경우
+       [ T key - Tool - Advenced - Accumulate 체크하기 ]
+   2.  앞면을 뚫고, 뒷면까지 체크하고 싶을 경우
+       [ T key - Tool - Advenced - Front Faces Only 체크해제, FallOff - Projected 체크하기 ]
+  3. Symmetry - Mirror Vertex Group 체크 안되어 있을 경우 글로벌 좌표를 기준으로 체크하기 때문에, 이를 확인할 것
+  4. 목에 관해서 붉은색이 급격하게 변할 경우 Weight가 너무 높은것으로, 이를 blur brush를 통해서 적절하게 처리하여 자연스럽게 구현한다.
+
+3 ) 눈이나 기타 머리 리깅적용하기
+  1. 눈 및 기타 적용안된 부분 선택하고 Ctrl + P key Automatic Weight 적용하기
+     [ 특정 부위가 튀어나오거나 이상있을 경우 아래의 make Parent 창 누르고 keep Transform 체크하기]
+  2. Automatic을 해도 잘 안됨. 말그대로 auto이기 때문에, 
+  3. Object Data Properties - Vertex Groups에서 Head만 냅두고 나머지는 삭제 후 Weight 1로 변경 후 Assign 적용하기.
+  4. 눈썹의 경우 Vertex Group가 없음. 따라서, 눈썹을 선택하고, 머리뼈를 선택한 상태로 Pose Mode에서 Ctrl + P Key 일반 Bone 적용
+  5. 눈썹은 얼굴을 기준으로 Mirror가 적용되어 있기때문에, 실제로 Bone을 움직이면, 이상한 위치로 이동함.
+     [ 따라서, Mirror를 Apply 적용해야하는데, Curve에서 mesh로 변경해야 가능함. ]
+     [ 오른쪽 마우스 누르고 Convert To - Mesh로 변경하면 가능하지만, 전부다 Apply 된 상태로 mesh로 넘어가버림. 나중에 변경하기 힘듬 따라서 추천하지 않음 ]
+     [ Mirror Object의 대상을 없얘주고 3D 커서를 기준으로 동작하게 변경하기 ]
+  6. 적용한 눈썹 이외의 나머지 눈썹을 선택한 상태로 적용한 눈썹 누르고, Ctrl + L key Copy Link Modifer 적용하기
+  7. 적용해도 위치가 이상할 경우 Ctrl + A Key 누르고 Apply All Transform으로 위치 전부다 초기화 시킨 후 적용하기
+  8. 머리카락의 경우에도 Curve로 만들었기 때문에, 머리 전부 선택하고, 동일한 방법으로 적용하면 됨.
+     [ Mirror Modifier가 있을 경우 Set Origin to 3d Cursor > Mirror 대상 없애기 ]
+     [ Mirror Modifier가 없을 경우 바로 Ctrl + P key 후 bone 적용하면 됨. ]
+
+3 ) 포토샵으로 최종적인 렌더링 화면 만들기.   
+   1. 렌더링 해서 5000/5000 사이즈 이미지 Export
+   2. 포토샵에서 Level 수정하기.
 ------------------------------------------------------------------------------------
 
 궁금한 내용 질문 리스트
@@ -19,3 +80,5 @@
 Max의 모퍼와 같이 얼굴의 표정을 Set-Up하는 기능 같은건 어떻게 하나요? [ 보류 질문 ]
 - 
 
+블렌더 바이패드 기능
+- 
